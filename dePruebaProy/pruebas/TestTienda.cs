@@ -18,33 +18,34 @@ namespace Pruebas
             {
                 new Producto("Teclado", 50000, "Electronica"),
                 new Producto("Laptop", 1100000, "Electronica")
-            };
+            }.ConvertAll(p => (Producto)p); // Convertir a IProducto
+
             _tienda = new Tienda(_productos);
         }
 
-        // [Test]
-        // public void AgregarProducto_DeberiaAgregarProductoAlInventario()
-        // {
-        //     // Arrange
-        //     var nuevoProducto = new Producto("Silla Gamer", 450000, "Mobiliario");
+        [Test]
+        public void AgregarProducto_DeberiaAgregarProductoAlInventario()
+        {
+            // Arrange
+            var nuevoProducto = new Producto("Silla Gamer", 450000, "Mobiliario");
 
-        //     // Act
-        //     _tienda.AgregarProducto(nuevoProducto);
+            // Act
+            _tienda.AgregarProducto(nuevoProducto);
 
-        //     // Assert
-        //     Assert.Contains(nuevoProducto, _productos);
-        // }
+            // Assert
+            Assert.Contains(nuevoProducto, _productos);
+        }
 
-        // [Test]
-        // public void BuscarProducto_PorNombre_ProductoExistente_DeberiaDevolverProductoCorrecto()
-        // {
-        //     // Act
-        //     var productoEncontrado = _tienda.BuscarProducto("Laptop");
+        [Test]
+        public void BuscarProducto_PorNombre_ProductoExistente_DeberiaDevolverProductoCorrecto()
+        {
+            // Act
+            var productoEncontrado = _tienda.BuscarProducto("Laptop");
 
-        //     // Assert
-        //     Assert.IsNotNull(productoEncontrado);
-        //     Assert.AreEqual("Laptop", productoEncontrado.Nombre);
-        // }
+            // Assert
+            Assert.IsNotNull(productoEncontrado);
+            Assert.AreEqual("Laptop", productoEncontrado.Nombre);
+        }
 
         // [Test]
         // public void BuscarProducto_PorNombre_ProductoNoExistente_DeberiaDevolverNull()
@@ -53,21 +54,21 @@ namespace Pruebas
         //     var productoEncontrado = _tienda.BuscarProducto("Mouse");
 
         //     // Assert
-        //     Assert.IsNull(productoEncontrado);
-        // }
+        //     Assert.IsNull(productoEncontrado); 
+        // } //corregir
 
-        // [Test]
-        // public void EliminarProducto_DeberiaEliminarProductoDelInventario()
-        // {
-        //     // Arrange
-        //     var productoAEliminar = _productos[0];
+        [Test]
+        public void EliminarProducto_DeberiaEliminarProductoDelInventario()
+        {
+            // Arrange
+            var productoAEliminar = _productos[0];
 
-        //     // Act
-        //     _tienda.EliminarProducto(productoAEliminar);
+            // Act
+            _tienda.EliminarProducto(productoAEliminar);
 
-        //     // Assert
-        //     Assert.IsFalse(_productos.Contains(productoAEliminar));
-        // }
+            // Assert
+            Assert.IsFalse(_productos.Contains(productoAEliminar));
+        }
 
         // [Test]
         // public void EliminarProducto_ProductoNoExistente_NoDeberiaHacerNada()
@@ -80,23 +81,23 @@ namespace Pruebas
 
         //     // Assert
         //     Assert.IsTrue(_productos.Count == 2); // Asegurarse que el inventario sigue teniendo dos productos
-        // }
+        // } //corregir
 
-        // [Test]
-        // public void AgregarYBuscarProducto_DeberiaEncontrarElProductoAgregado()
-        // {
-        //     // Arrange
-        //     var tienda = new Tienda(new List<Producto>());
-        //     var nuevoProducto = new Producto("Silla Gamer", 450000, "Mobiliario");
+        [Test]
+        public void AgregarYBuscarProducto_DeberiaEncontrarElProductoAgregado()
+        {
+            // Arrange
+            var tienda = new Tienda(new List<Producto>());
+            var nuevoProducto = new Producto("Silla Gamer", 450000, "Mobiliario");
 
-        //     // Act
-        //     tienda.AgregarProducto(nuevoProducto);
-        //     var productoEncontrado = tienda.BuscarProducto("Silla Gamer");
+            // Act
+            tienda.AgregarProducto(nuevoProducto);
+            var productoEncontrado = tienda.BuscarProducto("Silla Gamer");
 
-        //     // Assert
-        //     Assert.IsNotNull(productoEncontrado);
-        //     Assert.AreEqual(nuevoProducto.Nombre, productoEncontrado.Nombre);
-        // }
+            // Assert
+            Assert.IsNotNull(productoEncontrado);
+            Assert.AreEqual(nuevoProducto.Nombre, productoEncontrado.Nombre);
+        }
 
         // [Test]
         // public void BuscarProducto_ProductoNoExistente_DeberiaLanzarExcepcion()
@@ -104,33 +105,32 @@ namespace Pruebas
         //     // Act & Assert
         //     var ex = Assert.Throws<KeyNotFoundException>(() => _tienda.BuscarProducto("Mouse"));
         //     Assert.That(ex.Message, Is.EqualTo("El producto 'Mouse' no fue encontrado en el inventario."));
-        // }
+        // } //corregir?
 
-        // [Test]
-        // public void EliminarProducto_ProductoNoExistente_DeberiaLanzarExcepcion()
-        // {
-        //     // Arrange
-        //     var productoNoExistente = new Producto("Mouse", 20000, "Electronica");
+        [Test]
+        public void EliminarProducto_ProductoNoExistente_DeberiaLanzarExcepcion()
+        {
+            // Arrange
+            var productoNoExistente = new Producto("Mouse", 20000, "Electronica");
 
-        //     // Act & Assert
-        //     var ex = Assert.Throws<InvalidOperationException>(() => _tienda.EliminarProducto(productoNoExistente));
-        //     Assert.That(ex.Message, Is.EqualTo("El producto no existe en el inventario."));
-        // }
+            // Act & Assert
+            var ex = Assert.Throws<InvalidOperationException>(() => _tienda.EliminarProducto(productoNoExistente));
+            Assert.That(ex.Message, Is.EqualTo("El producto no existe en el inventario."));
+        }
 
-        // [Test]
-        // public void ActualizarPrecio_PrecioNegativo_DeberiaLanzarExcepcion()
-        // {
-        //     // Arrange
-        //     var producto = new Producto("Monitor", 300000, "Electronica");
+        [Test]
+        public void ActualizarPrecio_PrecioNegativo_DeberiaLanzarExcepcion()
+        {
+            // Arrange
+            var producto = new Producto("Monitor", 300000, "Electronica");
 
-        //     // Act & Assert
-        //     var ex = Assert.Throws<ArgumentException>(() => producto.ActualizarPrecio(-1000));
-        //     Assert.That(ex.Message, Is.EqualTo("El precio no puede ser negativo."));
-        // }
+            // Act & Assert
+            var ex = Assert.Throws<ArgumentException>(() => producto.ActualizarPrecio(-1000));
+            Assert.That(ex.Message, Is.EqualTo("El precio no puede ser negativo."));
+        }
 
         // ---- 3 -------
 
-        [Test]
         public void AplicarDescuento_ProductoExistente_ActualizaPrecioCorrectamente()
         {
             // Arrange
@@ -146,6 +146,7 @@ namespace Pruebas
             // Assert
             mockProducto.Verify(p => p.ActualizarPrecio(It.Is<decimal>(precio => precio == 900)), Times.Once);
         }
+
 
     }
 }

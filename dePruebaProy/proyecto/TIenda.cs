@@ -1,15 +1,20 @@
+// TIenda.cs
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
+
 
 public class Tienda
 {
     private List<Producto> _inventario;
 
-    public Tienda(List<Producto> inventarioInicial)
+    public Tienda(List<Producto> inventarioInicial) 
     {
         _inventario = inventarioInicial ?? new List<Producto>();
     }
+
 
     // Método para agregar un producto al inventario
     public void AgregarProducto(Producto producto)
@@ -23,22 +28,18 @@ public class Tienda
     }
 
     // Método para buscar un producto por su nombre
-    public Producto BuscarProducto(string nombre)
+    public IProducto BuscarProducto(string nombre)
     {
-        // 2.1
         var producto = _inventario.FirstOrDefault(p => p.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
         if (producto == null)
         {
-            // 2.1
             throw new KeyNotFoundException($"El producto '{nombre}' no fue encontrado en el inventario.");
         }
         return producto;
     }
 
-
     public void EliminarProducto(Producto producto)
     {
-        // 2.2
         if (!_inventario.Contains(producto))
         {
             throw new InvalidOperationException("El producto no existe en el inventario.");
@@ -46,8 +47,6 @@ public class Tienda
         _inventario.Remove(producto);
     }
 
-
-    // Método para calcular el total del carrito
     public decimal CalcularTotalCarrito(List<Producto> carrito)
     {
         return carrito.Sum(p => p.Precio);
@@ -61,5 +60,4 @@ public class Tienda
             producto.ActualizarPrecio(producto.Precio * (1 - porcentajeDescuento / 100));
         }
     }
-
 }

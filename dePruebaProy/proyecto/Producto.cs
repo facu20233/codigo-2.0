@@ -1,4 +1,14 @@
-public class Producto
+// productos.cs
+
+public interface IProducto
+{
+    string Nombre { get; }
+    decimal Precio { get; set; }
+    string Categoria { get; }
+    void ActualizarPrecio(decimal nuevoPrecio);
+}
+
+public class Producto : IProducto
 {
     public string Nombre { get; set; }
     public decimal Precio { get; set; }
