@@ -1,0 +1,31 @@
+--- 1 ----
+Preguntas:
+- ¿Puedes identificar pruebas de unidad y de integración en la práctica que realizaste?
+
+Pruebas de Unidad
+
+    AgregarProducto_DeberiaAgregarProductoAlInventario: 
+
+    BuscarProducto_PorNombre_ProductoExistente_DeberiaDevolverProductoCorrecto:
+
+    BuscarProducto_PorNombre_ProductoNoExistente_DeberiaDevolverNull: 
+
+    EliminarProducto_DeberiaEliminarProductoDelInventario: 
+
+    EliminarProducto_ProductoNoExistente_NoDeberiaHacerNada:
+
+Prueba de Integración
+
+    prueba que verifique cómo agregar un producto y luego buscarlo,
+
+
+---- 2 ----
+
+
+Sí, podrías haber escrito las pruebas primero antes de modificar el código de la aplicación. Este enfoque se conoce como Desarrollo Guiado por Pruebas (TDD, por sus siglas en inglés). El proceso de TDD consiste en tres pasos principales:
+
+Escribir una prueba que falle: Primero defines qué comportamiento esperas del código. Escribes una prueba para un método que aún no existe o no está implementado correctamente. La prueba fallará al principio, ya que el código aún no está completo.
+
+Hacer que la prueba pase: Luego, implementas el código necesario para que la prueba pase. Este es el código mínimo que necesitas escribir para satisfacer la prueba.
+
+Refactorizar: Una vez que la prueba pasa, limpias o mejoras el código manteniendo su funcionalidad. Esto asegura que el código esté bien estructurado y sea fácil de mantener.

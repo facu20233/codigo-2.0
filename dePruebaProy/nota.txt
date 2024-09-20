@@ -1,0 +1,6 @@
+proyecto
+    producto.cs
+    tienda.cs
+
+pruebas
+    testTienda.cs
